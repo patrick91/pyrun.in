@@ -28,7 +28,9 @@ const fetchEvent = async (url: string, puppeteer: puppeteer.Browser) => {
 export const fetchEvents = async () => {
   const base = "https://www.strava.com";
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const page = await browser.newPage();
   await page.goto(`${base}/clubs/1063997`);
 
