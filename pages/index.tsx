@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
+import { EventItem } from "../components/event-item";
 import { Event, fetchEvents } from "../lib/fetch-events";
 
-const Home: NextPage = ({ events }: { events: Event[] }) => {
+const Home: NextPage<{ events: Event[] }> = ({ events }) => {
   return (
     <div>
       <Head>
@@ -13,19 +13,17 @@ const Home: NextPage = ({ events }: { events: Event[] }) => {
       </Head>
 
       <main>
-        <h1>PyRun</h1>
+        <header className="text-center p-6">
+          <h1 className="font-logo font-extrabold text-7xl">PyRun</h1>
+        </header>
 
-        <h2>Next event(s)</h2>
+        <div className="text-center">
+          <h2 className="font-heading text-3xl">Next event(s)</h2>
+        </div>
 
         <ul>
           {events.map((event) => (
-            <li key={event.title}>
-              <h3>{event.title}</h3>
-              <p>{event.description}</p>
-              <p>{event.address}</p>
-              <p>{event.zone}</p>
-              <p>{event.startTime}</p>
-            </li>
+            <EventItem event={event} key={event.title} />
           ))}
         </ul>
       </main>
